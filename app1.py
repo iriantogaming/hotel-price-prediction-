@@ -1,4 +1,5 @@
 
+app_code = '''
 import streamlit as st
 import pandas as pd
 import joblib
@@ -9,7 +10,7 @@ room_encoder = joblib.load("room_encoder1.pkl")
 
 st.title("🏨 Hotel Room Price Prediction")
 
-# ── Input User ───────────────────────────────
+
 arrival_date = st.date_input("Arrival Date", value=date.today())
 
 checkout_date = st.date_input(
@@ -21,7 +22,7 @@ total_guests = st.number_input("Total Guests", min_value=1, value=2)
 
 room_type = st.selectbox("Room Type", room_encoder.classes_)
 
-# ── Kalkulasi Otomatis ───────────────────────
+
 if checkout_date <= arrival_date:
     st.error("Checkout date harus setelah arrival date!")
 else:
@@ -75,7 +76,7 @@ else:
         st.success(f"💰 Estimated Price: ${price_per_night:.2f} per night")
         st.success(f"🧾 Total Estimated Price: ${total_price:.2f} for {total_nights} nights")
 
-# ── Metrics ──────────────────────────────────
+
 st.markdown("---")
 st.subheader("📊 Model Performance")
 col1, col2, col3 = st.columns(3)
@@ -85,3 +86,10 @@ with col2:
     st.metric("MAE", "$24.91")
 with col3:
     st.metric("RMSE", "$32.62")
+'''
+
+with open("app1.py", "w", encoding="utf-8") as f:
+    f.write(app_code)
+
+print("app1.py berhasil dibuat")
+
